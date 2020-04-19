@@ -12,11 +12,17 @@ The script in the repo is used to scrape information about wine from [wine.com](
 3. In the same directory, Run the following command:
 ```sh
 $ pip install -r requirements.txt
-(install required Python libraries)
-$ python wine_url.py
-(this command will generate a wine_url.txt file in the same directory which will be used in the next step)
-$ python wine_listing.py
-(this command will generate a wine_listing.csv file containing all information about each type of wine. The CSV file will be used in the next step)
-$ python wine_image.py
-(this command will download all the related thumbnail images of the wine listings. For example, img1.jpg is the thumbnail image for the first listing)
 ``` 
+Install required Python libraries
+```sh
+$ python wine_url.py
+```
+This command will generate a wine_url.txt file in the same directory which will be used in the next step
+```sh
+$ python wine_listing.py
+```
+This command will generate a wine_listing.csv file containing all information about each type of wine. The CSV file will be used in the next step
+```sh
+$ python wine_image.py
+```
+This command will download all the related thumbnail images of the wine listings. For example, img1.jpg is the thumbnail image for the first listing
