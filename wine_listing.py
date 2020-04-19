@@ -36,9 +36,13 @@ def scrape(url):
 		# print(image_url)
 	except:
 		image_url = ""
+	
+	try:
+		name = page_html.cssselect(".pipName")[0]
+		name_text = name.text_content().strip()
+	except:
+		name_text = ""
 
-	name = page_html.cssselect(".pipName")[0]
-	name_text = name.text_content().strip()
 	if re.search(r"(.*)\b[1-9][0-9]{3}\b$", name_text):
 		year_text = name_text[-5:].strip()
 		name_text = name_text[:-5]

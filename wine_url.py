@@ -28,10 +28,10 @@ def scrape(urls, article_urls):
 
 if __name__ == '__main__':
 	article_urls = []
-	for i in range(189):
+	for i in range(15612):
 		print("scaping page %d" % (i + 1))
-		urls = "https://www.wine.com/list/wine/7155/" + str(i + 1)
-		post_urls = scrape(urls, article_urls)
+		urls = "https://www.wine.com/list/wine/7155/" +  str(i + 1) + "?showOutOfStock=true"
+		scrape(urls, article_urls)
 
 	with open('wine_url.txt', 'w') as f:
 		for item in article_urls:
