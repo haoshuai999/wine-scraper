@@ -4,6 +4,7 @@ import csv
 import random
 import pandas as pd
 import re
+import sys
 from lxml.html import fromstring
 
 def scrape(url):
@@ -130,6 +131,8 @@ def scrape(url):
 
 if __name__ == '__main__':
 	# scrape("https://www.wine.com/product/world-tour-white-wine-collection/100295")
+	start_url = int(sys.argv[1].lower())
+
 	f = open("wine_url.txt", "r")
 	urls = f.readlines()
 	urls = [("https://www.wine.com" + line.rstrip('\n')) for line in urls]
@@ -148,12 +151,10 @@ if __name__ == '__main__':
 	ship_list = []
 	available_list = []
 
-	count = 0
-	for url in urls:
+	for i in range(start_url - 1, len(urls)):
 		# print(url)
-		count += 1
-		image, year, name, genre, place, rating, ratingnum, capacity, alcohol, original_price, current_price, ship, available = scrape(url)
-		url_list.append(url)
+		image, year, name, genre, place, rating, ratingnum, capacity, alcohol, original_price, current_price, ship, available = scrape(urls[i])
+		url_list.append(urls[i])
 		image_list.append(image)
 		year_list.append(year)
 		name_list.append(name)
@@ -166,14 +167,14 @@ if __name__ == '__main__':
 		original_price_list.append(original_price)
 		current_price_list.append(current_price)
 		ship_list.append(ship)
-		available_list.append(available)`
-		if count % 500 == 0:
-			print(count)
+		available_list.append(available)
+		if (i + 1) % 5000 == 0:
+			print(i + 1)
 			print("output csv")
 			df = pd.DataFrame(list(zip(url_list, image_list, year_list, name_list, genre_list, place_list, rating_list, ratingnum_list, capacity_list, alcohol_list, original_price_list, current_price_list, ship_list, available_list)),
 				 columns=['listing_URL', 'image_URL', 'Year', 'Name', 'Genre', 'Place', 'Rating', 'Count_of_rating', 'Capacity', 'Alcohol_concentration', 'Original_Price', 'Current_price', 'Shipment', 'Available'])
-			df.to_csv("wine_listing.csv", index=False, encoding='utf-8-sig')
+			df.to_csv("wine_listing_"+ str(start_url) + "_" + str(i + 1) +".csv", index=False, encoding='utf-8-sig')
 
 	df = pd.DataFrame(list(zip(url_list, image_list, year_list, name_list, genre_list, place_list, rating_list, ratingnum_list, capacity_list, alcohol_list, original_price_list, current_price_list, ship_list, available_list)),
 		 columns=['listing_URL', 'image_URL', 'Year', 'Name', 'Genre', 'Place', 'Rating', 'Count_of_rating', 'Capacity', 'Alcohol_concentration', 'Original_Price', 'Current_price', 'Shipment', 'Available'])
-	df.to_csv("wine_listing.csv", index=False, encoding='utf-8-sig')
+	df.to_csv("wine_listing_"+ str(start_url) + "_end.csv", index=False, encoding='utf-8-sig')

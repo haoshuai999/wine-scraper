@@ -1,6 +1,7 @@
 import lxml
 import requests
 import random
+import sys
 from lxml.html import fromstring
 
 def scrape(urls, article_urls):
@@ -27,12 +28,17 @@ def scrape(urls, article_urls):
 	return article_urls
 
 if __name__ == '__main__':
+	start_page = int(sys.argv[1].lower())
 	article_urls = []
-	for i in range(15612):
-		print("scaping page %d" % (i + 1))
+	for i in range(start_page - 1, 15612):
 		urls = "https://www.wine.com/list/wine/7155/" +  str(i + 1) + "?showOutOfStock=true"
 		scrape(urls, article_urls)
+		if (i + 1) % 500 == 0:
+			print("scaping page %d" % (i + 1))
+			with open('wine_url_'+ str(start_page) + '_' + str(i + 1) +'txt', 'w') as f:
+				for item in article_urls:
+					f.write("%s\n" % item)
 
-	with open('wine_url.txt', 'w') as f:
+	with open('wine_url_'+ str(start_page) + '_end.txt', 'w') as f:
 		for item in article_urls:
 			f.write("%s\n" % item)
