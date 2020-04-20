@@ -17,6 +17,7 @@ $ pip install -r requirements.txt
 ```sh
 $ python wine_url.py [start_page_number]
 ```
+
 	- Replace the [start_page_number] variable with 0 if you start from scratch, or replace with the page number you want to start with. 
 	- A larger TXT file named "wine\_url\_[start_page_number]\_[end_page_number].txt" will be generated every time the script scrapes 5000 items. 
 	- The command will finally generate a "wine\_url\_[start_page_number]\_end.txt" file in the same directory.
@@ -27,6 +28,7 @@ $ python wine_url.py [start_page_number]
 ```sh
 $ python wine_listing.py [start_url_number]
 ```
+
 	- Replace the [start_url_number] variable with 0 if you start from scratch, or replace with the URL number you want to start with. 
 	- A larger CSV file named "wine\_listing\_[start_url_number]\_[end_url_number].csv" will be generated every time the script scrapes 5000 items. 
 	- The command will finally generate a "wine\_listing\_[start_url_number]\_end.csv" file in the same directory.
@@ -37,6 +39,7 @@ $ python wine_listing.py [start_url_number]
 ```sh
 $ python wine_image.py [start_url_number]
 ```
+
 	- Create a folder named "images" in the same directory.
 	- Replace the [start_url_number] variable with 0 if you start from scratch, or replace with the URL number you want to start with.
 	- A number will be printed to the command line every time the script download 5000 images. 
